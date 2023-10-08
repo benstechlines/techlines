@@ -5,7 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "server": "node server/index.js"
+    "server": "node server/index.js",
+    "client": "npm run start --prefix client",
+    "app": "concurrently npm \"npm run server\" \"npm run client\""
   },
   "keywords": [],
   "author": "",
@@ -22,5 +24,8 @@
     "mongoose": "^7.6.0",
     "nodemailer": "^6.9.5",
     "stripe": "^13.9.0"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
   }
 }
