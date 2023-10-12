@@ -10,7 +10,7 @@ function App() {
 				<Header />
 				<main>
 					<Routes>
-						<Route path='/' element={<ProductsScreen />}></Route>
+						<Route path='/' element={<ProductsScreen />} />
 					</Routes>
 				</main>
 			</Router>
