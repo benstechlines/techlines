@@ -69,7 +69,7 @@ const createProductReview = asyncHandler(async (req, res) => {
 });
 
 const createNewProduct = asyncHandler(async (req, res) => {
-	const { brand, name, category, stock, price, image, productIsNew, description } = req.body;
+	const { brand, name, category, stock, price, images, productIsNew, description } = req.body;
 
 	const newProduct = await Product.create({
 		brand,
@@ -77,7 +77,7 @@ const createNewProduct = asyncHandler(async (req, res) => {
 		category,
 		stock,
 		price,
-		image: '/images/' + image,
+		images: images,
 		productIsNew,
 		description,
 	});

@@ -11,6 +11,7 @@ import {
 	FormLabel,
 	Text,
 	Badge,
+	Spacer,
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { MdDriveFolderUpload } from 'react-icons/md';
@@ -26,7 +27,8 @@ const AddNewProduct = () => {
 	const [price, setPrice] = useState('');
 	const [productIsNew, setProductIsNew] = useState(true);
 	const [description, setDescription] = useState('');
-	const [image, setImage] = useState('');
+	const [imageOne, setImageOne] = useState('');
+	const [imageTwo, setImageTwo] = useState('');
 
 	const createNewProduct = () => {
 		dispatch(
@@ -36,7 +38,7 @@ const AddNewProduct = () => {
 				category,
 				stock,
 				price,
-				image,
+				images: [`/images/${imageOne}`, `images/${imageTwo}`],
 				productIsNew,
 				description,
 			})
@@ -46,9 +48,24 @@ const AddNewProduct = () => {
 	return (
 		<Tr>
 			<Td>
-				<Text fontSize='sm'>Image File Name</Text>
-				<Tooltip label={'Set the name of your image e.g., iPhone.jpg'} fontSize='sm'>
-					<Input size='sm' value={image} onChange={(e) => setImage(e.target.value)} placeholder='e.g., iPhone.jpg' />
+				<Text fontSize='sm'>Image File Name 1</Text>
+				<Tooltip label={'Set the name of your first image e.g., iPhone.jpg'} fontSize='sm'>
+					<Input
+						size='sm'
+						value={imageOne}
+						onChange={(e) => setImageOne(e.target.value)}
+						placeholder='e.g., iPhone.jpg'
+					/>
+				</Tooltip>
+				<Spacer />
+				<Text fontSize='sm'>Image File Name 2</Text>
+				<Tooltip label={'Set the name of your second image e.g., iPhone.jpg'} fontSize='sm'>
+					<Input
+						size='sm'
+						value={imageTwo}
+						onChange={(e) => setImageTwo(e.target.value)}
+						placeholder='e.g., iPhone.jpg'
+					/>
 				</Tooltip>
 			</Td>
 			<Td>
