@@ -62,7 +62,7 @@ const Header = () => {
 	}, [favoritesToggled, dispatch, userInfo]);
 
 	const logoutHandler = () => {
-		googleLogout()
+		googleLogout();
 		dispatch(logout());
 		toast({
 			description: 'You have been logged out.',
@@ -169,8 +169,9 @@ const Header = () => {
 									{userInfo.isAdmin && (
 										<>
 											<MenuDivider />
-											<MenuItem as={ReactLink} to='/admin-console'>
-												Admin Console
+											<MenuItem as={ReactLink} to={'/admin-console'}>
+												<MdOutlineAdminPanelSettings />
+												<Text ml='2'>Admin Console</Text>
 											</MenuItem>
 										</>
 									)}
