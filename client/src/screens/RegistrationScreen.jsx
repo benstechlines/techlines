@@ -5,28 +5,26 @@ import {
 	AlertTitle,
 	Box,
 	Button,
-	Center,
 	Container,
 	FormControl,
+	HStack,
 	Heading,
 	Stack,
 	Text,
-	VStack,
-	HStack,
 	useBreakpointValue,
-	useToast,
+	useToast
 } from '@chakra-ui/react';
+import { useGoogleLogin } from '@react-oauth/google';
+import axios from 'axios';
 import { Formik } from 'formik';
 import { useEffect } from 'react';
+import { FcGoogle } from 'react-icons/fc';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link as ReactLink, useNavigate, useParams } from 'react-router-dom';
+import { Link as ReactLink, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import PasswordField from '../components/PasswordField';
-import { register, resetPassword, resetState } from '../redux/actions/userActions';
 import TextField from '../components/TextField';
-import { FcGoogle } from 'react-icons/fc';
-import { useGoogleLogin, googleLogin } from '@react-oauth/google';
-import axios from 'axios';
+import { googleLogin, register } from '../redux/actions/userActions';
 
 const RegistrationScreen = () => {
 	const navigate = useNavigate();
