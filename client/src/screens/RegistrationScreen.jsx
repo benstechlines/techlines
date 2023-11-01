@@ -24,6 +24,9 @@ import * as Yup from 'yup';
 import PasswordField from '../components/PasswordField';
 import { register, resetPassword, resetState } from '../redux/actions/userActions';
 import TextField from '../components/TextField';
+import { FcGoogle } from 'react-icons/fc';
+import { useGoogleLogin, googleLogin } from '@react-oauth/google';
+import axios from 'axios';
 
 const RegistrationScreen = () => {
 	const navigate = useNavigate();
@@ -44,6 +47,18 @@ const RegistrationScreen = () => {
 			});
 		}
 	}, [userInfo, redirect, error, navigate, toast]);
+
+	const handleGoogleLogin = useGoogleLogin({
+		onSuccess: async (response) => {
+			const userInfo = await axios
+				.get('https://www.googleapis.com/oauth2/v3/userinfo', {
+					headers: { Authorization: `Bearer ${response.access_token}` },
+				})
+				.then((res) => res.data);
+			const { sub, email, name, picture } = userInfo;
+			dispatch(googleLogin(sub, email, name, picture));
+		},
+	});
 
 	return (
 		<Formik
@@ -110,6 +125,15 @@ const RegistrationScreen = () => {
 								<Stack spacing='6'>
 									<Button colorScheme='cyan' size='lg' fontSize='md' isLoading={loading} type='submit'>
 										Sign up
+									</Button>
+									<Button
+										colorScheme='cyan'
+										size='lg'
+										fontSize='md'
+										isLoading={loading}
+										onClick={() => handleGoogleLogin()}>
+										<FcGoogle size={30} />
+										Sign up with Google
 									</Button>
 								</Stack>
 							</Stack>
