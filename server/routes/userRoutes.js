@@ -11,7 +11,7 @@ const userRoutes = express.Router();
 
 //TODO: redefine expiresIn
 const genToken = (id) => {
-	return jwt.sign({ id }, process.env.TOKEN_SECRET, { expiresIn: '60d' });
+	return jwt.sign({ id }, process.env.TOKEN_SECRET, { expiresIn: '1d' });
 };
 
 // login
@@ -176,7 +176,7 @@ const getUserOrders = asyncHandler(async (req, res) => {
 	if (orders) {
 		res.json(orders);
 	} else {
-		res.status(404);
+		res.status(404).send('No orders could be found.');
 		throw new Error('No Orders found.');
 	}
 });
@@ -191,8 +191,8 @@ const deleteUser = asyncHandler(async (req, res) => {
 		const user = await User.findByIdAndRemove(req.params.id);
 		res.json(user);
 	} catch (error) {
-		res.status(404);
-		throw new Error('This use could not be found.');
+		res.status(404).send('This user could not be found.');
+		throw new Error('This user could not be found.');
 	}
 });
 

@@ -29,7 +29,7 @@ const getProduct = async (req, res) => {
 	if (product) {
 		res.json(product);
 	} else {
-		res.status(404);
+		res.status(404).send('Product not found.');
 		throw new Error('Product not found');
 	}
 };
@@ -44,7 +44,7 @@ const createProductReview = asyncHandler(async (req, res) => {
 		const alreadyReviewed = product.reviews.find((review) => review.user.toString() === user._id.toString());
 
 		if (alreadyReviewed) {
-			res.status(400);
+			res.status(400).send('Product already reviewed.');
 			throw new Error('Product already reviewed.');
 		}
 
@@ -63,7 +63,7 @@ const createProductReview = asyncHandler(async (req, res) => {
 		await product.save();
 		res.status(201).json({ message: 'Review has been saved.' });
 	} else {
-		res.status(404);
+		res.status(404).send('Product not found.');
 		throw new Error('Product not found.');
 	}
 });
@@ -91,7 +91,7 @@ const createNewProduct = asyncHandler(async (req, res) => {
 	if (newProduct) {
 		res.json(products);
 	} else {
-		res.status(404);
+		res.status(404).send('Product could not be uploaded.');
 		throw new Error('Product could not be uploaded.');
 	}
 });
@@ -121,7 +121,7 @@ const updateProduct = asyncHandler(async (req, res) => {
 
 		res.json(products);
 	} else {
-		res.status(404);
+		res.status(404).send('Product not found.');
 		throw new Error('Product not found.');
 	}
 });
@@ -146,7 +146,7 @@ const removeProductReview = asyncHandler(async (req, res) => {
 		const products = await Product.find({});
 		res.json({ products, pagination: {} });
 	} else {
-		res.status(404);
+		res.status(404).send('Product not found.');
 		throw new Error('Product not found.');
 	}
 });
@@ -157,7 +157,7 @@ const deleteProduct = asyncHandler(async (req, res) => {
 	if (product) {
 		res.json(product);
 	} else {
-		res.status(404);
+		res.status(404).send('Product not found.');
 		throw new Error('Product not found.');
 	}
 });
